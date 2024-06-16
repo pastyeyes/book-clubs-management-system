@@ -6,5 +6,10 @@
     - Users can have a set of tags (such as book names, book length, genre, author) 
     - Tags along with reading list statuses might be used to infer from there the recommendations.
 
+# Considerations for improvements
+- Repository layer should be behind a Controller layer that is imported into the endpoint layer
+- Controller layer handles the data transformation, and obtains the data from the repository.
+
 # Commands
 npm install express dotenv sequelize pg pg-hstore
+npm install --save-dev jest supertest sequelize-mock

@@ -3,6 +3,7 @@ const { getBookById } = require('../../repository/BookRepository');
 
 jest.mock('../../model/Book', () => ({
   findByPk: jest.fn(),
+  //getBookByTitle: jest.fn()
 }));
 
 // Mock console.log and console.error

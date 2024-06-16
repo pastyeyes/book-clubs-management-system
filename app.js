@@ -2,12 +2,17 @@ const express = require("express");
 const app = express();
 
 // Import repository
-const BookRepository = require("./repository/BookRepository");
+const BookController = require("./controller/BookController");
 
 app.get("/", async (req, res) => {
-    let book = await BookRepository.getBookById(1);
-    let title = await BookRepository.getBookByTitle("Sci-fi");
-    res.send("Hello World! Book: " + book.genre+ " Title: " +title);
+    try {
+        let book = await BookController.getBookById(1);
+        let title = await BookController.getBookByTitle("Sci-fi");
+        res.send("Hello World! Book: " + book.genre + " Title: " + title);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 app.listen(3000, () => {
