@@ -11,7 +11,8 @@ async function getBookById(bookId) {
         }
         return book;
     } catch (error) {
-        console.error('Error retrieving book:', error);
+        console.error('Error retrieving book:');
+        throw error;
     }
 }
   
@@ -26,7 +27,8 @@ async function getBookByTitle(title) {
         }
         return book.title;
     } catch (error) {
-        console.error('Error retrieving book:', error);
+        console.error('Error retrieving book:')
+        throw error;
     }
 }
   
