@@ -10,6 +10,10 @@
 - Repository layer should be behind a Controller layer that is imported into the endpoint layer
 - Controller layer handles the data transformation, and obtains the data from the repository.
 
+# Test remaining to be done
+- Integration Database
+- Unit BookRespository.getBookByTitle
+
 # Commands
 npm install express dotenv sequelize pg pg-hstore
 npm install --save-dev jest supertest sequelize-mock
