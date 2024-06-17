@@ -1,4 +1,4 @@
-const { DbClient: Model, DataTypes } = require('../config/OrmConfig');
+const { dbClient: Model, DataTypes } = require('../config/DataSourceConfiguration');
 
 // Define the Book model
 const Book = Model.define('Book', {

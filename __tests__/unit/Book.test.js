@@ -1,8 +1,8 @@
-const { DbClient: Model, DataTypes } = require('../../config/OrmConfig');
+const { dbClient: Model } = require('../../config/DataSourceConfiguration');
 
-// Mock the OrmConfig module
-jest.mock('../../config/OrmConfig', () => ({
-  DbClient: {
+// Mock the DataSourceConfiguration module
+jest.mock('../../config/DataSourceConfiguration', () => ({
+  dbClient: {
     define: jest.fn(),
   },
   DataTypes: {
