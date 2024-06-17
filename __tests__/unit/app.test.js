@@ -19,7 +19,7 @@ describe('App', () => {
     test('GET / should return greeting with book information', async () => {
         const mockBook = { id: 1, title: 'Test Book', genre: 'Test Genre' };
         BookController.getBookById.mockResolvedValue(mockBook);
-        BookController.getBookByTitle.mockResolvedValue(mockBook.title);
+        BookController.getBookByTitle.mockResolvedValue(mockBook);
 
         const response = await request(app).get('/');
 

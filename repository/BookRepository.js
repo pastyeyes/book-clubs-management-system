@@ -25,7 +25,7 @@ async function getBookByTitle(title) {
         } else {
         console.log('Book not found');
         }
-        return book.title;
+        return book;
     } catch (error) {
         console.error('Error retrieving book:')
         throw error;
