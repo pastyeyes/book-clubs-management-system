@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "debug" : "vite --mode=debug --port=4000",
+    "debug": "vite --mode=debug --port=4000",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.3"
   },
