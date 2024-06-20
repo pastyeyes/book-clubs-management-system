@@ -12,7 +12,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(credentials) {
         try {
-            const response = await fetch(`${AUTH_ENDPOINT}/login`, {
+            const response = await fetch(`${AUTH_ENDPOINT}/auth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,7 +27,6 @@ export const useAuthStore = defineStore('auth', {
             const data = await response.json();
             this.user = data.user;
             this.token = data.token;
-            this.isAuthenticated = true;
             localStorage.setItem('token', this.token);
         } catch (error) {
             console.error('Failed to login:', error);
@@ -36,7 +35,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async register(credentials) {
         try {
-            const response = await fetch(`${AUTH_ENDPOINT}/register`, {
+            const response = await fetch(`${AUTH_ENDPOINT}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +50,6 @@ export const useAuthStore = defineStore('auth', {
             const data = await response.json();
             this.user = data.user;
             this.token = data.token;
-            this.isAuthenticated = true;
             localStorage.setItem('token', this.token);
         } catch (error) {
             console.error('Failed to register:', error);
@@ -61,7 +59,6 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       this.user = null;
       this.token = null;
-      this.isAuthenticated = false;
       localStorage.removeItem('token');
     },
     async fetchUser() {

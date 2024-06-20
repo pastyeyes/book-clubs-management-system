@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { computed } from 'vue';
 
@@ -41,13 +42,15 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const isAuthenticated = computed(() => authStore.isAuthenticated);
+    const router = useRouter();
 
-    return { authStore, isAuthenticated };
+    return { authStore, isAuthenticated, router };
   },
   methods: {
     async onLogout() {
       try{
         await this.authStore.logout();
+        this.router.push('/'); // Redirect to home after logout
       } catch (error) {
         console.log(error);
       }

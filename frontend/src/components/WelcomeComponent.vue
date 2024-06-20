@@ -21,9 +21,8 @@ import { useAuthStore } from '../stores/auth';
 export default {
   setup() {
     const authStore = useAuthStore();
-    const isAuthenticated = authStore.isAuthenticated;
 
-    return { authStore, isAuthenticated };
+    return { authStore };
   }
 };
 </script>

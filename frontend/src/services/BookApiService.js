@@ -9,7 +9,7 @@ export async function getBookByTitle() {
     if (!inputBookTitle.value) {
       return;
     }
-    const response = await fetch(`${API_ENDPOINT}/api/book/title/${inputBookTitle.value}`, {
+    const response = await fetch(`${API_ENDPOINT}/book/title/${inputBookTitle.value}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
