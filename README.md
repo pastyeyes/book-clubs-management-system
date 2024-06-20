@@ -11,9 +11,28 @@
 - Controller layer handles the data transformation, and obtains the data from the repository.
 
 # Test remaining to be done
-- Integration Database
-- Unit BookRespository.getBookByTitle
+
+# Prerequisites
+- Terraform by hashicorp executable CLI.
+- AWS CLI
+- Docker Engine
 
 # Commands
-npm install express dotenv sequelize pg pg-hstore
-npm install --save-dev jest supertest sequelize-mock
+- `npm install express dotenv sequelize pg pg-hstore` for system dependencies
+- `npm install --save-dev jest supertest` for testing
+- `aws configure` to setup the local credentials
+- `terraform init | plan | apply | destroy` to deploy infrastructure
+
+# Deployment
+- Uses a terraform script to deploy the infrastructure
+
+# In the EC2
+- Install ngnix (necessary?) `sudo apt install ngnix`
+- install nvm (node version manager)
+```
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+source ~/.bashrc
+```
+- Install node and npm `nvm install 20.12.2`
+- Install process manager for node apps `npm install pm2 -g`
+- git is installed by default

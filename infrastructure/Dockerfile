@@ -1,7 +1,7 @@
 # Use the official PostgreSQL base image
 #FROM postgres:latest
-FROM postgres:alpine
-
+#FROM postgres:alpine
+FROM postgres:14.12
 
 # Set environment variables (optional)
 ENV POSTGRES_USER=myuser
