@@ -5,7 +5,7 @@
                 <h1>Welcome</h1>
                 <h2>Book Club Management System</h2>
                 <div v-if="authStore.isAuthenticated">
-                    <p>Hello: {{ authStore.user }}</p>
+                    <p>Hello: {{ authStore.user.name }}</p>
                 </div>
                 <div v-else>
                     <p>You are not logged in.</p>

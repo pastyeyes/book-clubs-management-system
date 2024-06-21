@@ -9,6 +9,14 @@
         </div>
         <form @submit.prevent="signup">
           <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" v-model="username" required />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" v-model="name" required />
+          </div>
+          <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" v-model="email" required />
           </div>
@@ -30,11 +38,15 @@ import { ref } from 'vue';
 export default {
   setup() {
     const authStore = useAuthStore();
+    const username = ref('');
+    const name = ref('');
     const email = ref('');
     const password = ref('');
     const error = ref('');
     return {
       authStore,
+      username,
+      name,
       email,
       password,
       error
@@ -44,6 +56,8 @@ export default {
     async signup() {
       try {
           await this.authStore.register({
+            username: this.username,
+            name: this.name,
             email: this.email,
             password: this.password,
           });
@@ -58,4 +72,3 @@ export default {
   }
 };
 </script>
-  

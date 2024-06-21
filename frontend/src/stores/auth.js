@@ -12,20 +12,20 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(credentials) {
         try {
-            const response = await fetch(`${AUTH_ENDPOINT}/auth`, {
+            const response = await fetch(`${AUTH_ENDPOINT}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(credentials),
+                body: JSON.stringify(credentials)
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Login failed. Error: ${response.status}`);
             }
 
             const data = await response.json();
-            this.user = data.user;
+            this.user = data.user; //should not include password
             this.token = data.token;
             localStorage.setItem('token', this.token);
         } catch (error) {
@@ -33,22 +33,22 @@ export const useAuthStore = defineStore('auth', {
             throw new Error(error.message);
         }
     },
-    async register(credentials) {
+    async register(newUserDetails) {
         try {
             const response = await fetch(`${AUTH_ENDPOINT}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(credentials),
+                body: JSON.stringify(newUserDetails),
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Registration failed. Error: ${response.status}`);
             }
 
             const data = await response.json();
-            this.user = data.user;
+            this.user = data.user; //should not include password
             this.token = data.token;
             localStorage.setItem('token', this.token);
         } catch (error) {

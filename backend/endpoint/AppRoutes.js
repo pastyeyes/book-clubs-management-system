@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json()); 
 
 //Authentication api
-app.use(`${prefix}`, AuthRoute);
+app.use(`${prefix}/auth`, AuthRoute);
 //Book api
 app.use(`${prefix}/book`, BookRoute);
 

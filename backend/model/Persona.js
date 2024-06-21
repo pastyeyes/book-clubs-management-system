@@ -1,4 +1,4 @@
-const { dbClient: Model, DataTypes } = require('sequelize');
+const { dbClient: Model, DataTypes } = require('../config/DataSourceConfiguration');
 
 // Define the Persona model
 const Persona = Model.define('Persona', {
