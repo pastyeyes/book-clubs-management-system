@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 
 export default {

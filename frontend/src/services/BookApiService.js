@@ -1,5 +1,5 @@
-import { onMounted, ref } from 'vue'
-import { API_ENDPOINT } from './env/constants';
+import { ref } from 'vue'
+import { API_ENDPOINT } from '@/constants.js';
 
 export const inputBookTitle = ref('');
 export const books = ref([]);

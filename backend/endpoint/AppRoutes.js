@@ -3,9 +3,11 @@ const cors = require('cors');
 const AuthRoute = require('./AuthRoute');
 const BookRoute = require('./BookRoute');
 
-const basePath = '/api';
-const currentVersion = 'v1';
-const prefix = `${basePath}/${currentVersion}`;
+require('dotenv').config();
+const basePath = process.env.API_ENDPOINT_BASE_ROUTE;
+const currentVersion = process.env.API_VERSION;
+
+const prefix = basePath.concat(currentVersion);
 
 //App
 const app = express();

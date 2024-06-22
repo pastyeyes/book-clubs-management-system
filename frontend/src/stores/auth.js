@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { AUTH_ENDPOINT } from './env/constants';
+import { AUTH_ENDPOINT } from '@/constants.js';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
