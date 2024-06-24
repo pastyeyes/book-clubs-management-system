@@ -25,9 +25,10 @@ const Persona = Model.define('Persona', {
         type: DataTypes.STRING(255),
         allowNull: false
     }
-}, 
-{
-    tableName: 'persona', // Specify the table name
-});
+    }, 
+    {
+        tableName: 'persona', // Specify the table name
+    }
+);
 
 module.exports = Persona;
