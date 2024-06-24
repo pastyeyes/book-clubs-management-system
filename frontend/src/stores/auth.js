@@ -11,38 +11,36 @@ export const useAuthStore = defineStore('auth', {
   },
   actions: {
     async login(credentials) {
-        try {
-            const response = await fetch(`${AUTH_ENDPOINT}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials)
-            });
-
-            const data = await this.handleResponse(response);
-            this.setUserAndToken(data.user, data.token);
-        } catch (error) {
-            console.error('Failed to login:', error);
-            throw new Error('Failed');
-        }
-    },
-    async register(newUserDetails) {
-        try {
-          const response = await fetch(`${AUTH_ENDPOINT}/auth/register`, {
+      try {
+          const response = await fetch(`${AUTH_ENDPOINT}/auth/login`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify(newUserDetails),
+              body: JSON.stringify(credentials)
           });
 
           const data = await this.handleResponse(response);
           this.setUserAndToken(data.user, data.token);
-        } catch (error) {
-            console.error('Failed to register:', error);
-            throw new Error('Failed');
-        }
+      } catch (error) {
+        this.handleError('Failed to login', error);
+      }
+    },
+    async register(newUserDetails) {
+      try {
+        const response = await fetch(`${AUTH_ENDPOINT}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUserDetails),
+        });
+
+        const data = await this.handleResponse(response);
+        this.setUserAndToken(data.user, data.token);
+      } catch (error) {
+        this.handleError('Failed to register', error);
+      }
     },
     async fetchUser() {
       const token = localStorage.getItem('token');
@@ -57,13 +55,12 @@ export const useAuthStore = defineStore('auth', {
           });
 
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error();
           }
 
           this.user = await response.json();
         } catch (error) {
-          console.error('Failed to fetch user:', error);
-          throw new Error('Failed');
+          this.handleError('Failed to fetch user', error);
         }
       }
     },
@@ -86,6 +83,10 @@ export const useAuthStore = defineStore('auth', {
       this.user = user;
       this.token = token;
       localStorage.setItem('token', token);
+    },
+    handleError(message, error) {
+      console.error(message, error);
+      throw new Error('Failed');
     }
   }
 });

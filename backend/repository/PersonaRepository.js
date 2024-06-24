@@ -1,26 +1,15 @@
 const Persona = require('../model/Persona');
 
-async function saveUser(user) {
-    try {
+class PersonaRepository{
+    async saveUser(user) {
         const newUser = await Persona.create(user);
         return newUser;
-    } catch (error) {
-        console.error('Error saving user:', error);
-        throw error;
     }
-}
 
-async function getUserByEmail(email) {
-    try {
+    async getUserByEmail(email) {
         const user = await Persona.findOne({ where: { email } });
         return user;
-    } catch (error) {
-        console.error('Error retrieving user:', error);
-        throw error;
     }
 }
 
-module.exports = {
-    saveUser,
-    getUserByEmail
-};
+module.exports = new PersonaRepository();

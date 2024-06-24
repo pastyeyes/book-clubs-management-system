@@ -1,25 +1,30 @@
 const express = require('express');
 const router = express.Router();
 
-const PersonaController = require('../controller/AuthController');
+const AuthService = require('../service/AuthService');
+
+// Helper function to handle errors
+const handleErrors = (res, error, message) => {
+    console.error(error);
+    res.status(400).json({ message });
+  };
 
 router.post('/login', async (req, res) => {
     try {
-        const result = await PersonaController.loginUser(req.body);
+        const result = await AuthService.loginUser(req.body);
         res.json(result);
     } catch (error) {
-        res.status(400).json({ message: 'Invalid credentials' });
+        handleErrors(res, error, 'Invalid credentials');
     }
 });
 
 router.post('/register', async (req, res) => {
     try {
-        const result = await PersonaController.registerUser(req.body);
+        const result = await AuthService.registerUser(req.body);
         res.json(result);
     } catch (error) {
-        res.status(400).json({ message: 'Creation failed' });
+        handleErrors(res, error, 'Creation failed');
     }
 });
 
-  
 module.exports = router;

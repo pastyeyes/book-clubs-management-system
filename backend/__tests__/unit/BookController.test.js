@@ -1,4 +1,4 @@
-const { getBookById, getBookByTitle } = require('../../controller/BookController');
+const { getBookById, getBookByTitle } = require('../../service/BookService');
 const BookRepository = require('../../repository/BookRepository');
 
 jest.mock('../../repository/BookRepository', () => ({
@@ -6,7 +6,7 @@ jest.mock('../../repository/BookRepository', () => ({
     getBookByTitle: jest.fn()
 }));
 
-describe('Book Controller', () => {
+describe('Book Service', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });

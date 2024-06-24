@@ -1,39 +1,24 @@
 const Book = require('../model/Book');
 
-// Retrieve a book by its ID
-async function getBookById(bookId) {
-    try {
+class BookRepository {
+    // Retrieve a book by its ID
+    async getBookById(bookId) {
         const book = await Book.findByPk(bookId);
-        if (book) {
-            console.log('Book found:', book.toJSON());
-        } else {
-            console.log('Book not found');
-        }
         return book;
-    } catch (error) {
-        console.error('Error retrieving book:');
-        throw error;
     }
-}
-  
-// Retrieve a book by its title
-async function getBookByTitle(title) {
-    try {
+    
+    // Retrieve a book by its title
+    async getBookByTitle(title) {
         const book = await Book.findOne({ where: { title } });
-        if (book) {
-        console.log('Book found:', book.toJSON());
-        } else {
-        console.log('Book not found');
-        }
         return book;
-    } catch (error) {
-        console.error('Error retrieving book:')
-        throw error;
     }
+
+    // Retrieve a book by its genre
+    async getBookByGenre(genre) {
+        const book = await Book.findOne({ where: { genre } });
+        return book;
+    }
+
 }
-  
-  // Export functions for use in other parts of the application
-module.exports = {
-    getBookById,
-    getBookByTitle
-};
+
+module.exports = new BookRepository();
