@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const PersonaController = require('../controller/PersonaController');
+const PersonaController = require('../controller/AuthController');
 
 router.post('/login', async (req, res) => {
     try {

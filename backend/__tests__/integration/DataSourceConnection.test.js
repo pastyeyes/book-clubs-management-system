@@ -5,6 +5,7 @@ describe('DataSourceConnection', () => {
     test('should connect to the database', async () => {
         // The authenticate method will throw an error if the connection fails
         await expect(dbClient.authenticate()).resolves.toBeUndefined();
+        await dbClient.close();
     });
 
     test('should fail to connect to the database with incorrect settings', async () => {

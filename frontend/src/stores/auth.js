@@ -20,40 +20,28 @@ export const useAuthStore = defineStore('auth', {
                 body: JSON.stringify(credentials)
             });
 
-            if (!response.ok) {
-                throw new Error(`Login failed. Error: ${response.status}`);
-            }
-
-            const data = await response.json();
-            this.user = data.user; //should not include password
-            this.token = data.token;
-            localStorage.setItem('token', this.token);
+            const data = await this.handleResponse(response);
+            this.setUserAndToken(data.user, data.token);
         } catch (error) {
             console.error('Failed to login:', error);
-            throw new Error(error.message);
+            throw new Error('Failed');
         }
     },
     async register(newUserDetails) {
         try {
-            const response = await fetch(`${AUTH_ENDPOINT}/auth/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newUserDetails),
-            });
+          const response = await fetch(`${AUTH_ENDPOINT}/auth/register`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(newUserDetails),
+          });
 
-            if (!response.ok) {
-                throw new Error(`Registration failed. Error: ${response.status}`);
-            }
-
-            const data = await response.json();
-            this.user = data.user; //should not include password
-            this.token = data.token;
-            localStorage.setItem('token', this.token);
+          const data = await this.handleResponse(response);
+          this.setUserAndToken(data.user, data.token);
         } catch (error) {
             console.error('Failed to register:', error);
-            throw new Error(error.message);
+            throw new Error('Failed');
         }
     },
     async logout() {
@@ -80,8 +68,24 @@ export const useAuthStore = defineStore('auth', {
           this.user = await response.json();
         } catch (error) {
           console.error('Failed to fetch user:', error);
+          throw new Error('Failed');
         }
       }
     },
-  },
+    // If the query failed, throws error with the error that comes in the response
+    // If not failed, will return the response body parsed as json
+    async handleResponse(response) {
+      const data = await response.json();
+      if (!response.ok && response.status === 400) {
+        throw new Error(data.message);
+      }
+      return data;
+    },
+    // Sets values in the storage
+    setUserAndToken(user, token) {
+      this.user = user;
+      this.token = token;
+      localStorage.setItem('token', token);
+    }
+  }
 });
