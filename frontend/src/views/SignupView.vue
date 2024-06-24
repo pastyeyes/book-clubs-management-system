@@ -40,8 +40,8 @@
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ErrorAlert from '@/components/errorManagement/ErrorInlineAlert.vue';
-import { errorStateManagement } from '@/components/errorManagement/errorInlineStateManagement.js'
+import ErrorAlert from '@/components/errorInline/ErrorInlineNotification.vue';
+import { errorStateManagement } from '@/components/errorInline/useErrorInlineNotificationjs'
 
 const { errorMessage, setError, resetError } = errorStateManagement();
 

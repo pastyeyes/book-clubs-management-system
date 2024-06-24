@@ -41,16 +41,18 @@
   import { computed } from 'vue';
   import { useRouter } from 'vue-router';
 
+  import { showToast } from '@/components/toasts/useToastNotification';
+
   const router = useRouter();
   const isAuthenticated = computed(() => useAuthStore().isAuthenticated);
   
   const onLogout = async () => {
       try {
-          await useAuthStore().logout();
-          router.push('/');
+        await useAuthStore().logout();
+        router.push('/');
       } catch (error) {
-          console.log(error);
-          alert('Failed')
+        console.log(error);
+        showToast(error.message, 'error');
       }
   };
 </script>

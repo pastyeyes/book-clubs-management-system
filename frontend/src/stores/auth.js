@@ -44,11 +44,6 @@ export const useAuthStore = defineStore('auth', {
             throw new Error('Failed');
         }
     },
-    async logout() {
-      this.user = null;
-      this.token = null;
-      localStorage.removeItem('token');
-    },
     async fetchUser() {
       const token = localStorage.getItem('token');
       if (token) {
@@ -71,6 +66,11 @@ export const useAuthStore = defineStore('auth', {
           throw new Error('Failed');
         }
       }
+    },
+    async logout() {
+      this.user = null;
+      this.token = null;
+      localStorage.removeItem('token');
     },
     // If the query failed, throws error with the error that comes in the response
     // If not failed, will return the response body parsed as json
