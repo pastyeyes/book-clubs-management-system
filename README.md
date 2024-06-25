@@ -13,7 +13,9 @@
 # Considerations for improvements
 - Repository layer should be behind a Controller layer that is imported into the endpoint layer
 - Controller layer handles the data transformation, and obtains the data from the repository.
-
+- Adding a loader and fade/block the page when loading data after a request was sent.
+- Fetch API's response.ok is not standard so should be replaced across the fronted.
+- Use axios or fechapi builder to setup default parameters such as content-type and token.
 # Test remaining to be done
 
 # Prerequisites
