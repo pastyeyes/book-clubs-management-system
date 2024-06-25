@@ -18,7 +18,7 @@
               >Password:</label>
             <input type="password" class="form-control" v-model="password" required />
           </div>
-          <button @mousedown="resetError" type="submit" class="btn btn-primary"
+          <button type="submit" class="btn btn-primary"
             >Login</button>
         </form>
       </div>
@@ -30,8 +30,8 @@
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ErrorAlert from '@/components/errorInline/ErrorInlineNotification.vue';
-import { errorStateManagement } from '@/components/errorInline/useErrorInlineNotificationjs'
+import ErrorAlert from '@/components/inline-error/ErrorInlineNotification.vue';
+import { errorStateManagement } from '@/components/inline-error/useErrorInlineNotification.js'
 
 const { errorMessage, setError, resetError } = errorStateManagement();
 
@@ -41,8 +41,8 @@ const password = ref('');
 const router = useRouter();
 
 const login = async () => {
+  resetError();
   const authStore = useAuthStore();
-  
   try{
     await authStore.login({
       email: email.value,

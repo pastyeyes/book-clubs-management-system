@@ -5,10 +5,11 @@ const toast = useToast();
 
 const defaultOptions = {
     position: 'top-right',
-    queue: true
+    duration : 6000, // 0 means it will not close automatically
+    queue: false
 }
 
-export const showToast = (message = 'Error', type = 'default') => {
+export const showToast = (message = 'Error', type = 'success') => {
     switch (type) {
         case 'success':
         toast.success(message, defaultOptions)
