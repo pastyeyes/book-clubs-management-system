@@ -8,6 +8,8 @@
 - Book Club can exists without any member, or members = 0
 - Status and Genre are strings due to simplicity but should be tables.
 - Errors are not verbose, but generic. It provides little security added. The errors are interally logged. 
+- The develop of functional code was prefered over testeable code. There is lot of room to improve in testeability.
+- The search by genre uses the subject property to search in Google Books Api but lists the Categories field not the genre so genre and category might and likely have differents words
 # Considerations for improvements
 - Repository layer should be behind a Controller layer that is imported into the endpoint layer
 - Controller layer handles the data transformation, and obtains the data from the repository.

@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const AuthRoute = require('./AuthRoute');
-const BookRoute = require('./BookRoute');
+const GoogleBookRoute = require('./GoogleBookRoute');
 const BookClubRoute = require('./BookClubRoute');
 const BookClubMember = require('./BookClubMemberRoute');
 
@@ -23,7 +23,7 @@ app.use(express.json());
 //Authentication api
 app.use(`${prefix}/auth`, AuthRoute);
 //Book api
-app.use(`${prefix}/book`, BookRoute);
+app.use(`${prefix}/google-book`, GoogleBookRoute);
 //Book Club api
 app.use(`${prefix}/book-club`, BookClubRoute);
 app.use(`${prefix}/book-club-member`, BookClubMember);
