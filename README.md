@@ -5,7 +5,9 @@
     - This can be the separate to a different implementation.
     - Users can have a set of tags (such as book names, book length, genre, author) 
     - Tags along with reading list statuses might be used to infer from there the recommendations.
-
+- Book Club can exists without any member, or members = 0
+- Status and Genre are strings due to simplicity but should be tables.
+- Errors are not verbose, but generic. It provides little security added. The errors are interally logged. 
 # Considerations for improvements
 - Repository layer should be behind a Controller layer that is imported into the endpoint layer
 - Controller layer handles the data transformation, and obtains the data from the repository.

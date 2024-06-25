@@ -1,4 +1,4 @@
-const { dbClient } = require('../../config/DataSourceConfiguration');
+const dbClient = require('../../config/DataSourceConfiguration');
 const { Sequelize } = require('sequelize');
 
 describe('DataSourceConnection', () => {

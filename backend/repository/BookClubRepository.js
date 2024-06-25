@@ -7,10 +7,9 @@ class BookClubRepository {
         return bookClub;
     }
 
-    // Retrieve a book club by its name
-    async getBookClubByName(name) {
-        const bookClub = await BookClub.findOne({ where: { name } });
-        return bookClub;
+    async getAllBookClubs() {
+        const bookClubs = await BookClub.findAll();
+        return bookClubs;
     }
 
     // Create a new book club
@@ -19,25 +18,6 @@ class BookClubRepository {
         return newBookClub;
     }
 
-    // Update a book club
-    async updateBookClub(bookClubId, bookClubData) {
-        const bookClub = await BookClub.findByPk(bookClubId);
-        if (!bookClub) {
-            return null;
-        }
-        const updatedBookClub = await bookClub.update(bookClubData);
-        return updatedBookClub;
-    }
-
-    // Delete a book club
-    async deleteBookClub(bookClubId) {
-        const bookClub = await BookClub.findByPk(bookClubId);
-        if (!bookClub) {
-            return false;
-        }
-        await bookClub.destroy();
-        return true;
-    }
 }
 
 module.exports = new BookClubRepository();

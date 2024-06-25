@@ -1,4 +1,4 @@
-const { dbClient: Model } = require('../../config/DataSourceConfiguration');
+const dbClient = require('../../config/DataSourceConfiguration');
 
 // Mock the DataSourceConfiguration module
 jest.mock('../../config/DataSourceConfiguration', () => ({
@@ -15,7 +15,7 @@ describe('Book model', () => {
   it('should define the Book model correctly', () => {
     const Book = require('../../model/Book');
 
-    expect(Model.define).toHaveBeenCalledWith('Book', {
+    expect(dbClient.define).toHaveBeenCalledWith('Book', {
       id: {
         type: 'INTEGER',
         primaryKey: true,

@@ -10,7 +10,7 @@ class AuthService {
 
     async loginUser(credentials) {
         try {
-            const user = await PersonaRepository.getUserByEmail(credentials.email);
+            const user = await PersonaRepository.getPersonaByEmail(credentials.email);
             if (!user) {
                 throw new Error('User not found');
             }
@@ -31,7 +31,7 @@ class AuthService {
 
     async registerUser(user) {
         try {
-            const existingUser = await PersonaRepository.getUserByEmail(user.email);
+            const existingUser = await PersonaRepository.getPersonaByEmail(user.email);
             if (existingUser) {
                 throw new Error('User already exists');
             }
@@ -42,7 +42,7 @@ class AuthService {
             //password comes as plain text, lets hash it with the salt
             user.password = await bcrypt.hash(user.password, salt);
 
-            const newUser = await PersonaRepository.saveUser(user);
+            const newUser = await PersonaRepository.savePersona(user);
 
             if(!newUser){
                 throw new Error('User not created');

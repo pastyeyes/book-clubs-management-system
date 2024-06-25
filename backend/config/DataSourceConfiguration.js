@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 const DataSourceSettings = require('./DataSourceSettings');
 
 // Configure client
-const dbClient = new Sequelize(DataSourceSettings.database, DataSourceSettings.user, DataSourceSettings.password, {
+const sequelize = new Sequelize(DataSourceSettings.database, DataSourceSettings.user, DataSourceSettings.password, {
     host: DataSourceSettings.host,
     dialect: DataSourceSettings.dialect,
     port: DataSourceSettings.port,
@@ -11,7 +11,4 @@ const dbClient = new Sequelize(DataSourceSettings.database, DataSourceSettings.u
     }
 });
 
-module.exports = {
-    dbClient, 
-    DataTypes
-};
+module.exports =  sequelize;

@@ -1,35 +1,38 @@
-const { dbClient: Model, DataTypes } = require('../config/DataSourceConfiguration');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/DataSourceConfiguration');
+const DiscussionThread = require('./DiscussionThread');
+const Persona = require('./Persona');
 
-const DiscussionPost = Model.define('DiscussionPost', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    discussion_thread_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'discussion_thread',
-        key: 'id'
-      }
-    },
-    persona_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'persona',
-        key: 'id'
-      }
-    },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false
+const DiscussionPost = sequelize.define('DiscussionPost', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  discussion_thread_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: DiscussionThread,
+      key: 'id'
     }
-  }, 
-  {
-    tableName: 'discussion_posts'
+  },
+  persona_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Persona,
+      key: 'id'
+    }
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
   }
-);
+}, {
+  tableName: 'discussion_posts',
+  schema: 'public'
+});
+
+DiscussionPost.belongsTo(DiscussionThread, { foreignKey: 'discussion_thread_id' });
+DiscussionPost.belongsTo(Persona, { foreignKey: 'persona_id' });
 
 module.exports = DiscussionPost;

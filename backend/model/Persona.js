@@ -1,34 +1,32 @@
-const { dbClient: Model, DataTypes } = require('../config/DataSourceConfiguration');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/DataSourceConfiguration');
 
-// Define the Persona model
-const Persona = Model.define('Persona', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    username: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-        unique: true
-    },
-    email: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: DataTypes.STRING(255),
-        allowNull: false
-    },
-    name: {
-        type: DataTypes.STRING(255),
-        allowNull: false
-    }
-    }, 
-    {
-        tableName: 'persona', // Specify the table name
-    }
-);
+const Persona = sequelize.define('Persona', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  username: {
+    type: DataTypes.STRING(100),
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    unique: true
+  },
+  password: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  },
+  name: {
+    type: DataTypes.STRING(255),
+    allowNull: false
+  }
+}, {
+  tableName: 'persona',
+  schema: 'public'
+});
 
 module.exports = Persona;

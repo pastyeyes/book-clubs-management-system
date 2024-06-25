@@ -1,27 +1,31 @@
-const { dbClient: Model, DataTypes } = require('../config/DataSourceConfiguration');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/DataSourceConfiguration');
+const BookClub = require('./BookClub');
+const Persona = require('./Persona');
 
-// Define the BookClubMember model
-const BookClubMember = Model.define('BookClubMember', {
-    book_club_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      references: {
-        model: 'book_club',
-        key: 'id'
-      }
+const BookClubMember = sequelize.define('BookClubMember', {
+  book_club_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: BookClub,
+      key: 'id'
     },
-    persona_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      references: {
-        model: 'persona',
-        key: 'id'
-      }
-    }
-    }, 
-    {
-        tableName: 'book_club_member'
-    }
-);
+    primaryKey: true
+  },
+  persona_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Persona,
+      key: 'id'
+    },
+    primaryKey: true
+  }
+}, {
+  tableName: 'book_club_member',
+  schema: 'public'
+});
+
+BookClubMember.belongsTo(BookClub, { foreignKey: 'book_club_id' });
+BookClubMember.belongsTo(Persona, { foreignKey: 'persona_id' });
 
 module.exports = BookClubMember;

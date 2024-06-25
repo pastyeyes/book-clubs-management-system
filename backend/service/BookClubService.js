@@ -7,9 +7,17 @@ class BookClubService {
         throw error;
     }
 
+    /* Example of a club object     
+    {
+        "id": 1,
+        "name": "Awesome Book Club",
+        "description": "A community of avid readers discussing great books."
+      } 
+    */
+
     async createBookClub(bookClubData) {
         try {
-            const newBookClub = await BookClubRepository.create(bookClubData);
+            const newBookClub = await BookClubRepository.createBookClub(bookClubData);
             console.log('New book club created:', newBookClub.toJSON());
             return newBookClub;
         } catch (error) {
@@ -19,7 +27,7 @@ class BookClubService {
 
     async getBookClubById(id) {
         try {
-            const bookClub = await BookClubRepository.findById(id);
+            const bookClub = await BookClubRepository.getBookClubById(id);
             if (bookClub) {
                 console.log('Book club found:', bookClub.toJSON());
             } else {
@@ -33,7 +41,7 @@ class BookClubService {
 
     async getAllBookClubs() {
         try {
-            const bookClubs = await BookClubRepository.findAll();
+            const bookClubs = await BookClubRepository.getAllBookClubs();
             console.log('Retrieved all book clubs');
             return bookClubs;
         } catch (error) {
@@ -41,33 +49,6 @@ class BookClubService {
         }
     }
 
-    async updateBookClub(id, bookClubData) {
-        try {
-            const updatedBookClub = await BookClubRepository.update(id, bookClubData);
-            if (updatedBookClub) {
-                console.log('Book club updated:', updatedBookClub.toJSON());
-            } else {
-                console.log('Book club not found for update');
-            }
-            return updatedBookClub;
-        } catch (error) {
-            this.handleError('Error updating book club:', error);
-        }
-    }
-
-    async deleteBookClub(id) {
-        try {
-            const result = await BookClubRepository.delete(id);
-            if (result) {
-                console.log('Book club deleted:', id);
-            } else {
-                console.log('Book club not found for deletion');
-            }
-            return result;
-        } catch (error) {
-            this.handleError('Error deleting book club:', error);
-        }
-    }
 }
 
 module.exports = new BookClubService();

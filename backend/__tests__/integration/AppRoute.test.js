@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../endpoint/app');
+const app = require('../../endpoint/AppRoute');
 
 describe('App', () => {
     afterEach(() => {
