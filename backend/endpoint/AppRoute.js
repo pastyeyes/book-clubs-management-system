@@ -8,8 +8,9 @@ const BookClubMember = require('./BookClubMemberRoute');
 require('dotenv').config();
 const basePath = process.env.API_ENDPOINT_BASE_ROUTE;
 const currentVersion = process.env.API_VERSION;
-
 const prefix = basePath.concat(currentVersion);
+
+const verifyToken = require('../config/TokenVerification');
 
 //App
 const app = express();
@@ -19,6 +20,9 @@ app.use(cors());
 
 // Middleware for parsing JSON
 app.use(express.json()); 
+
+// Apply the JWT verification middleware
+app.use(verifyToken);
 
 //Authentication api
 app.use(`${prefix}/auth`, AuthRoute);

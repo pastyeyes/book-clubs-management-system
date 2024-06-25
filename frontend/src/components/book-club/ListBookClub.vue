@@ -38,7 +38,7 @@ import { errorStateManagement } from '@/components/inline-error/useErrorInlineNo
 import ErrorInlineNotification from '@/components/inline-error/ErrorInlineNotification.vue';
 import { API_ENDPOINT } from '@/constants.js';
 import { useAuthStore } from '@/stores/auth';
-
+import { fetchWithAuth } from '@/utils/apiHelper.js'
 import { showToast } from '@/components/toast/useToastNotification';
 
 const { errorMessage, setError, resetError } = errorStateManagement();
@@ -51,7 +51,7 @@ const userMemberships = ref([]); // This hold the IDs of the book clubs the user
 const fetchBookClubs = async () => {
     resetError();
     try {
-        const response = await fetch(`${API_ENDPOINT}/book-club`, {
+        const response = await fetchWithAuth(`${API_ENDPOINT}/book-club`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ const fetchUserMemberships = async () => {
     resetError();
     try {
         const userId = useAuthStore().user.id;
-        const response = await fetch(`${API_ENDPOINT}/book-club-member/persona/${userId}`, {
+        const response = await fetchWithAuth(`${API_ENDPOINT}/book-club-member/persona/${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ const joinBookClub = async (bookClubId) => {
     resetError();
     try {
         const userId = useAuthStore().user.id;
-        const response = await fetch(`${API_ENDPOINT}/book-club-member/join`, {
+        const response = await fetchWithAuth(`${API_ENDPOINT}/book-club-member/join`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ const leaveBookClub = async (bookClubId) => {
     resetError();
     try {
         const userId = useAuthStore().user.id;
-        const response = await fetch(`${API_ENDPOINT}/book-club-member/leave`, {
+        const response = await fetchWithAuth(`${API_ENDPOINT}/book-club-member/leave`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

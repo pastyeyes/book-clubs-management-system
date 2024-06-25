@@ -21,6 +21,8 @@ import { ref } from 'vue';
 import { errorStateManagement } from '@/components/inline-error/useErrorInlineNotification.js';
 import ErrorInlineNotification from '@/components/inline-error/ErrorInlineNotification.vue';
 import { API_ENDPOINT } from '@/constants.js';
+import { fetchWithAuth } from '@/utils/apiHelper.js'
+
 
 const { errorMessage, setError, resetError } = errorStateManagement();
 
@@ -31,7 +33,7 @@ const emits = defineEmits(['bookClubCreated']);
 const createBookClub = async () => {
     resetError();
     try {
-        const response = await fetch(`${API_ENDPOINT}/book-club`, {
+        const response = await fetchWithAuth(`${API_ENDPOINT}/book-club`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

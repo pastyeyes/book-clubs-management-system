@@ -79,6 +79,8 @@ import { ref } from 'vue';
 import { API_ENDPOINT } from '@/constants.js';
 import { errorStateManagement } from '@/components/inline-error/useErrorInlineNotification.js';
 import ErrorInlineNotification from '@/components/inline-error/ErrorInlineNotification.vue';
+import { fetchWithAuth } from '@/utils/apiHelper.js'
+
 
 const { errorMessage, setError, resetError } = errorStateManagement();
 
@@ -102,7 +104,7 @@ const getBookByTitle = async () => {
     }
 
     try {
-        const response = await fetch(`${API_ENDPOINT}/google-book/title/${inputBookTitle.value}`, {
+        const response = await fetchWithAuth(`${API_ENDPOINT}/google-book/title/${inputBookTitle.value}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
